@@ -30,6 +30,8 @@ export default defineNuxtConfig({
     RAZORPAY_KEY_SECRET: process.env.RAZORPAY_KEY_SECRET || "",
     DIRECTUS_API_TOKEN: process.env.DIRECTUS_API_TOKEN || "",
     FIREBASE_SERVICE_ACCOUNT: process.env.FIREBASE_SERVICE_ACCOUNT || "",
+    // "true" = refuse save/credits/e-mail requests that cannot be verified (needs FIREBASE_SERVICE_ACCOUNT)
+    REQUIRE_VERIFIED_AUTH: process.env.REQUIRE_VERIFIED_AUTH || "",
     DB_API_URL: process.env.NUXT_DB_API_URL || "https://temp.finaceindia.com",
     // AI (Claude) — question-flow assistance, compliance narration, optional
     // wording refinement. Every AI feature has a deterministic non-AI

@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
   const userId = getQuery(event).userId;
   if (!userId) throw createError({ statusCode: 400, statusMessage: "Missing userId" });
 
-  const config = useRuntimeConfig(event);
+  const config = serverConfig(event);
   const dbUrl = config.DB_API_URL || "https://temp.finaceindia.com";
   const headers = {};
   if (config.DIRECTUS_API_TOKEN) headers.Authorization = `Bearer ${config.DIRECTUS_API_TOKEN}`;

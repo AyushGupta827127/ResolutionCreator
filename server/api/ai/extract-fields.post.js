@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: "Missing freeText or questions" });
   }
 
-  const config = useRuntimeConfig(event);
+  const config = serverConfig(event);
   const fallback = { values: {}, aiUsed: false };
   if (!isAiConfigured(config)) return fallback;
 

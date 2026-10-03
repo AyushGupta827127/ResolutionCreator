@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
   const { resolutionTitle, draftText, style, instruction } = await readBody(event);
   if (!draftText) throw createError({ statusCode: 400, statusMessage: "Missing draftText" });
 
-  const config = useRuntimeConfig(event);
+  const config = serverConfig(event);
   const fallback = { refinedText: draftText, aiUsed: false };
   if (!isAiConfigured(config)) return fallback;
 

@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
       throw createError({ statusCode: 400, statusMessage: "Missing required fields" });
     }
 
-    const config = useRuntimeConfig(event);
+    const config = serverConfig(event);
     const razorpaySecret = config.RAZORPAY_KEY_SECRET;
     const razorpayKeyId = config.RAZORPAY_KEY_ID;
     if (!razorpaySecret || !razorpayKeyId) {

@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 413, statusMessage: "Message too large" });
   }
 
-  const config = useRuntimeConfig(event);
+  const config = serverConfig(event);
   if (!config.SMTP_USER || !config.SMTP_PASS) {
     throw createError({ statusCode: 500, statusMessage: "Email service is not configured" });
   }

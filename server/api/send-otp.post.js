@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: "Invalid purpose" });
   }
 
-  const config = useRuntimeConfig(event);
+  const config = serverConfig(event);
   if (!config.SMTP_USER || !config.SMTP_PASS) {
     throw createError({ statusCode: 500, statusMessage: "Email service is not configured" });
   }

@@ -5,15 +5,21 @@ import { getAdminAuth } from "./firebaseAdmin";
  * Returns { uid, email }.
  *
  * - FIREBASE_SERVICE_ACCOUNT configured -> the token is required and verified.
- * - Not configured, development        -> allowed (so the app runs with no secrets), `unverified: true`.
- * - Not configured, production         -> refused: never trust the client's word in production.
+ * - Not configured                      -> allowed with a warning, `unverified: true`
+ *                                          (set REQUIRE_VERIFIED_AUTH=true to refuse instead — recommended in production).
  */
 export async function requireUser(event) {
-  const config = useRuntimeConfig(event);
+  const config = serverConfig(event);
 
   if (!config.FIREBASE_SERVICE_ACCOUNT) {
-    if (process.env.NODE_ENV === "production") {
-      throw createError({ statusCode: 503, statusMessage: "Authentication is not configured on the server." });
+    // Can't verify tokens without the service account. Production is strict only when REQUIRE_VERIFIED_AUTH=true
+    // (otherwise saving / credits would stop working on a server that simply hasn't been given the key yet).
+    if (String(config.REQUIRE_VERIFIED_AUTH || "").toLowerCase() === "true") {
+      throw createError({ statusCode: 503, statusMessage: "Sign-in verification is not configured on the server (FIREBASE_SERVICE_ACCOUNT is missing)." });
+    }
+    if (!globalThis.__warnedUnverifiedAuth) {
+      globalThis.__warnedUnverifiedAuth = true;
+      console.warn("[auth] FIREBASE_SERVICE_ACCOUNT is not set: requests are NOT verified. Set it (and REQUIRE_VERIFIED_AUTH=true) in production.");
     }
     return { uid: null, email: null, unverified: true };
   }

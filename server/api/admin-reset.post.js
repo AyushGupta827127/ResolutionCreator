@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 401, statusMessage: otpResult.reason || "OTP verification failed" });
   }
 
-  const config = useRuntimeConfig(event);
+  const config = serverConfig(event);
   const dbUrl = config.DB_API_URL || "https://temp.finaceindia.com";
 
   try {

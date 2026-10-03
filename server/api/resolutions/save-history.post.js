@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 413, statusMessage: "Document is too large to save." });
   }
 
-  const config = useRuntimeConfig(event);
+  const config = serverConfig(event);
   const dbUrl = config.DB_API_URL || "https://temp.finaceindia.com";
   const headers = { "Content-Type": "application/json" };
   if (config.DIRECTUS_API_TOKEN) headers.Authorization = `Bearer ${config.DIRECTUS_API_TOKEN}`;

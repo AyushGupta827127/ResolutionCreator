@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: "Choose one of the available credit packs." });
   }
 
-  const config = useRuntimeConfig(event);
+  const config = serverConfig(event);
   const keyId = config.RAZORPAY_KEY_ID;
   const keySecret = config.RAZORPAY_KEY_SECRET;
   if (!keyId || !keySecret) {

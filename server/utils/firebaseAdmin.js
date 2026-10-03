@@ -7,7 +7,7 @@ import { getAuth } from "firebase-admin/auth";
  * service-account JSON (raw or base64) — see .env.example.
  */
 function loadServiceAccount() {
-  const raw = useRuntimeConfig().FIREBASE_SERVICE_ACCOUNT;
+  const raw = serverConfig().FIREBASE_SERVICE_ACCOUNT;
   if (!raw) {
     throw createError({
       statusCode: 500,

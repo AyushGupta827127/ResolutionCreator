@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
   const { resolutionTitle, sectionName, fields = [], question } = await readBody(event);
   if (!question) throw createError({ statusCode: 400, statusMessage: "Missing question" });
 
-  const config = useRuntimeConfig(event);
+  const config = serverConfig(event);
   const fallback = {
     answer: "AI help isn't configured for this deployment yet — check the field's info icon for guidance instead.",
     aiUsed: false,

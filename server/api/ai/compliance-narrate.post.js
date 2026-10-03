@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
 
   if (!results.length) return { narration: "", aiUsed: false };
 
-  const config = useRuntimeConfig(event);
+  const config = serverConfig(event);
   if (!isAiConfigured(config)) return fallback;
 
   try {

@@ -167,13 +167,15 @@ const resetStep = ref(1);
 const newPassword = ref("");
 const confirmNewPassword = ref("");
 
+import { friendlyAuthError } from "@/utils/authErrors";
+
 const withBusy = async (fn) => {
   busy.value = true;
   errorMessage.value = "";
   try {
     await fn();
   } catch (error) {
-    errorMessage.value = error?.data?.statusMessage || error.message || "Something went wrong.";
+    errorMessage.value = friendlyAuthError(error);
   } finally {
     busy.value = false;
   }
