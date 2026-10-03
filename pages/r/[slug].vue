@@ -526,6 +526,20 @@
               </Transition>
 
               <Transition name="fade">
+                <div v-if="answerIssues.length" id="answer-issues" class="rounded-2xl border border-red-200 bg-red-50/60 p-4 text-sm text-red-700" role="alert">
+                  <p class="flex items-center gap-1.5 font-medium">
+                    <Icon name="ph:warning-circle-bold" class="h-4 w-4 shrink-0" /> {{ answerIssues.length }} answer{{ answerIssues.length === 1 ? "" : "s" }} need{{ answerIssues.length === 1 ? "s" : "" }} fixing before you can generate:
+                  </p>
+                  <ul class="mt-2 space-y-1">
+                    <li v-for="(issue, i) in answerIssues" :key="i" class="flex items-start justify-between gap-2">
+                      <span>{{ issue.message }}</span>
+                      <button class="btn-ghost shrink-0 !px-2 !py-1 text-xs text-red-700 hover:bg-red-100" @click="fixField(issue.field)">Fix</button>
+                    </li>
+                  </ul>
+                </div>
+              </Transition>
+
+              <Transition name="fade">
                 <div v-if="finishingIssues.length" class="rounded-2xl border border-red-200 bg-red-50/60 p-4 text-sm text-red-700">
                   <p v-for="(msg, i) in finishingIssues" :key="i" class="flex items-start gap-1.5">
                     <Icon name="ph:warning-circle-bold" class="mt-0.5 h-4 w-4 shrink-0" /> {{ msg }}
@@ -571,7 +585,13 @@
           <div class="fixed inset-x-0 bottom-0 z-30 border-t border-ink-100 bg-white/95 backdrop-blur">
             <div class="mx-auto flex max-w-[1440px] flex-col gap-2 px-5 py-3 sm:min-h-[76px] sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-10 lg:px-14">
               <div class="min-w-0 text-sm" aria-live="polite">
-                <p v-if="finishingIssues.length && reviewState !== 'running'" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-red-700">
+                <p v-if="answerIssues.length && reviewState !== 'running'" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-red-700">
+                  <span class="flex items-center gap-2 font-medium">
+                    <Icon name="ph:warning-octagon-fill" class="h-[18px] w-[18px] shrink-0" /> {{ answerIssues.length }} answer{{ answerIssues.length === 1 ? "" : "s" }} need{{ answerIssues.length === 1 ? "s" : "" }} fixing — {{ answerIssues[0].message }}
+                  </span>
+                  <button type="button" class="font-semibold underline underline-offset-2 hover:text-red-900" @click="fixField(answerIssues[0].field)">Fix answer</button>
+                </p>
+                <p v-else-if="finishingIssues.length && reviewState !== 'running'" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-red-700">
                   <span class="flex items-center gap-2 font-medium">
                     <Icon name="ph:warning-circle-fill" class="h-[18px] w-[18px] shrink-0" /> {{ finishingIssues.length }} detail{{ finishingIssues.length === 1 ? "" : "s" }} still needed for the documents you selected
                   </span>
@@ -774,6 +794,7 @@ import { useKnownFacts } from "@/composables/useKnownFacts";
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useCategoryAccent } from "@/composables/useCategoryAccent";
 import { getAuthHeaders } from "@/composables/useAuthHeaders";
+import { validateAnswers } from "~~/server/utils/validators.js"; // the exact checks the server runs on Generate
 import { buildComplianceDisplay, complianceCounts } from "@/composables/useComplianceDisplay";
 
 const route = useRoute();
@@ -934,11 +955,22 @@ function isAiSuggested(field) {
   return field in aiAppliedValues && answers[field] === aiAppliedValues[field];
 }
 
+// The server refuses impossible answers (e.g. more directors present than the board has). Run the very same
+// checks here so the problem shows next to the field, and stops "Continue", instead of surfacing at Generate.
+const answerIssues = computed(() =>
+  resolution.value ? validateAnswers(resolution.value.questions, answers).filter((i) => i.severity === "critical") : []
+);
+const issueByField = computed(() => {
+  const m = {};
+  for (const i of answerIssues.value) if (!(i.field in m)) m[i.field] = i.message;
+  return m;
+});
+
 function errorFor(question) {
-  if (!sectionAttempted.value) return "";
-  if (question.required && (answers[question.field] === undefined || answers[question.field] === "")) {
-    return `${question.label} is required.`;
-  }
+  const issue = issueByField.value[question.field];
+  const isRequiredMsg = issue && /is required\.$/.test(issue);
+  // "required" waits until the person tries to continue; any other problem (wrong number, bad date, …) shows straight away
+  if (issue && (!isRequiredMsg || sectionAttempted.value)) return issue;
   return "";
 }
 
@@ -1044,11 +1076,19 @@ watch(
   { deep: true }
 );
 
-function goNextSection() {
+async function goNextSection() {
   sectionAttempted.value = true;
   const visible = currentSectionVisibleQuestions.value;
   const missing = visible.some((q) => q.required && (answers[q.field] === undefined || answers[q.field] === ""));
   if (missing) return;
+  // answers that are present but impossible (cross-field checks included) also stop the section here
+  const wrong = visible.find((q) => issueByField.value[q.field]);
+  if (wrong) {
+    await nextTick();
+    document.getElementById(`field-${wrong.field}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+    document.getElementById(`field-${wrong.field}`)?.focus({ preventScroll: true });
+    return;
+  }
 
   for (const q of visible) {
     if (q.smartDefault && answers[q.field]) remember(q.field, answers[q.field]);
@@ -1153,6 +1193,7 @@ const reviewState = computed(() => {
 });
 const primaryLabel = computed(
   () =>
+    (answerIssues.value.length && reviewState.value !== "running" && `Fix ${answerIssues.value.length} answer${answerIssues.value.length === 1 ? "" : "s"}`) ||
     (finishingIssues.value.length && reviewState.value !== "running" && "Complete document details") ||
     ({
       notChecked: "Review compliance first",
@@ -1164,6 +1205,7 @@ const primaryLabel = computed(
 );
 const primaryDisabled = computed(() => reviewState.value === "running" || (reviewState.value === "needsAck" && !warningsAcknowledged.value && !finishingIssues.value.length));
 function onPrimaryAction() {
+  if (answerIssues.value.length && reviewState.value !== "running") return fixField(answerIssues.value[0].field);
   if (finishingIssues.value.length && reviewState.value !== "running") return focusFirstMissingExtra();
   if (reviewState.value === "notChecked") runComplianceCheck();
   else if (reviewState.value === "blocked") goToFirstIssue();
@@ -1296,6 +1338,7 @@ async function focusFirstMissingExtra() {
 
 // "Review compliance" never sits disabled without a reason: if details are missing, show and focus them.
 function reviewCompliance() {
+  if (answerIssues.value.length) return fixField(answerIssues.value[0].field);
   if (finishingIssues.value.length) return focusFirstMissingExtra();
   return runComplianceCheck();
 }
