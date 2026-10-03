@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 297" width="420" height="594">
+<rect width="210" height="297" fill="#fff"/>
+<rect x="0" y="0" width="210" height="5" fill="#1e1b4b"/>
+<text x="105" y="34" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="700" letter-spacing="1.2" fill="#1e1b4b">BOARD RESOLUTION</text>
+<text x="105" y="47" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="7" font-weight="700" fill="#1e1b4b">ABC PRIVATE LIMITED</text>
+<rect x="22" y="54" width="166" height="0.8" fill="#1e1b4b"/>
+<g font-family="Arial,Helvetica,sans-serif">
+<text x="22" y="72" font-size="5.5" fill="#667085">Date: [Date]</text>
+<text x="22" y="82" font-size="5.5" fill="#667085">Place: [Location]</text>
+<text x="22" y="100" font-size="6.5" font-weight="700" fill="#1e1b4b">Subject:</text>
+<text x="22" y="110" font-size="6.5" fill="#1e1b4b">Change of Registered Office</text>
+<text x="22" y="140" font-size="6.5" font-weight="700" fill="#1e1b4b">RESOLVED THAT</text>
+</g>
+<rect x="22" y="150" width="166" height="2.4" rx="1.2" fill="#d9dde8"/><rect x="22" y="159" width="160" height="2.4" rx="1.2" fill="#d9dde8"/><rect x="22" y="168" width="166" height="2.4" rx="1.2" fill="#d9dde8"/><rect x="22" y="177" width="150" height="2.4" rx="1.2" fill="#d9dde8"/><rect x="22" y="186" width="166" height="2.4" rx="1.2" fill="#d9dde8"/><rect x="22" y="195" width="158" height="2.4" rx="1.2" fill="#d9dde8"/><rect x="22" y="204" width="120" height="2.4" rx="1.2" fill="#d9dde8"/>
+<text x="22" y="226" font-family="Arial,Helvetica,sans-serif" font-size="6.5" font-weight="700" fill="#1e1b4b">RESOLVED FURTHER THAT</text>
+<rect x="22" y="234" width="146" height="2.4" rx="1.2" fill="#e6e9f1"/><rect x="22" y="243" width="130" height="2.4" rx="1.2" fill="#e6e9f1"/>
+<rect x="22" y="268" width="50" height="0.8" fill="#9aa1b5"/><rect x="138" y="268" width="50" height="0.8" fill="#9aa1b5"/>
+<text x="22" y="276" font-family="Arial,Helvetica,sans-serif" font-size="5" fill="#667085">Director</text>
+<text x="138" y="276" font-family="Arial,Helvetica,sans-serif" font-size="5" fill="#667085">Director</text>
+</svg>

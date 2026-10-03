@@ -1,0 +1,172 @@
+{
+  "slug": "appoint-managing-director",
+  "title": "Appoint a Managing Director",
+  "category": "Board Meeting → Directors & KMP",
+  "keywords": [
+    "managing director",
+    "MD",
+    "whole-time director",
+    "KMP",
+    "remuneration"
+  ],
+  "meetingType": "board",
+  "resolutionKind": "board",
+  "description": "Board consent to appoint a Managing Director / Whole-Time Director, subject to shareholder approval at the next general meeting.",
+  "complianceRuleIds": [
+    "RULE-BM-01",
+    "RULE-BM-02",
+    "RULE-BM-03",
+    "RULE-BM-06"
+  ],
+  "mcaForms": [
+    "MR-1",
+    "DIR-12"
+  ],
+  "records": [
+    "Board minutes",
+    "Appointment letter",
+    "Register of Directors and KMP"
+  ],
+  "questions": [
+    {
+      "id": "q-company-name",
+      "field": "company_name",
+      "label": "Company name",
+      "type": "text",
+      "required": true,
+      "sequence": 1,
+      "section": "Company details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-cin",
+      "field": "cin",
+      "label": "Corporate Identification Number (CIN)",
+      "type": "text",
+      "required": true,
+      "sequence": 2,
+      "section": "Company details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-meeting-date",
+      "field": "meeting_date",
+      "label": "Board meeting date",
+      "type": "date",
+      "required": true,
+      "sequence": 3,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-meeting-place",
+      "field": "meeting_place",
+      "label": "Meeting place",
+      "type": "text",
+      "required": true,
+      "sequence": 4,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-notice-days",
+      "field": "notice_days",
+      "label": "How many clear days' notice was given for this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 5,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-total-directors",
+      "field": "total_directors",
+      "label": "Total strength of the Board",
+      "type": "number",
+      "required": true,
+      "sequence": 6,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-directors-present",
+      "field": "directors_present",
+      "label": "How many directors are present at this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 7,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-director-name",
+      "field": "director_name",
+      "label": "Proposed Managing Director's full name",
+      "type": "text",
+      "required": true,
+      "sequence": 8,
+      "section": "Appointment details"
+    },
+    {
+      "id": "q-designation",
+      "field": "designation",
+      "label": "Designation",
+      "type": "select",
+      "required": true,
+      "sequence": 9,
+      "section": "Appointment details",
+      "options": [
+        {
+          "label": "Managing Director",
+          "value": "Managing Director"
+        },
+        {
+          "label": "Whole Time Director",
+          "value": "Whole Time Director"
+        }
+      ]
+    },
+    {
+      "id": "q-effective-date",
+      "field": "effective_date",
+      "label": "Effective date of appointment",
+      "type": "date",
+      "required": true,
+      "sequence": 10,
+      "section": "Appointment details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-remuneration-basis",
+      "field": "remuneration_basis",
+      "label": "Remuneration basis",
+      "type": "textarea",
+      "required": true,
+      "sequence": 11,
+      "section": "Appointment details",
+      "placeholder": "e.g. monthly remuneration and other terms as may be finalised by the Board, per the appointment letter"
+    },
+    {
+      "id": "q-roc-jurisdiction",
+      "field": "roc_jurisdiction",
+      "label": "Registrar of Companies (jurisdiction)",
+      "type": "text",
+      "required": false,
+      "sequence": 12,
+      "section": "Filing",
+      "smartDefault": true
+    }
+  ],
+  "template": {
+    "agendaTitle": "To appoint {{director_name}} as {{designation}}",
+    "proposal": "It is proposed that {{director_name}} be appointed as {{designation}} of the Company with effect from {{effective_date}}, subject to the approval of shareholders at the ensuing general meeting. The Board members discussed and approved the following resolution.",
+    "body": "\"RESOLVED THAT pursuant to the provisions of Sections 196, 197, 203 and Schedule V of the Companies Act, 2013, Rule 8 of the Companies (Appointment and Remuneration of Managerial Personnel) Rules, 2014, and any other applicable provisions of law, and subject to the Articles of Association of the Company and approval of shareholders of the Company at the ensuing general meeting, the consent of the Board be and is hereby accorded for the appointment of {{director_name}} as {{designation}} of the Company with effect from {{effective_date}}, on {{remuneration_basis}}.\n\nRESOLVED FURTHER THAT the terms and conditions of the appointment shall be as per the appointment letter, including its revision from time to time.\n\nRESOLVED FURTHER THAT {{director_name}} be and is hereby authorised to file necessary forms with the Registrar of Companies, {{roc_jurisdiction}}.\n\nRESOLVED FURTHER THAT any one Director or the Company Secretary be and is hereby authorised to make necessary entries in the respective registers and records of the Company.\n\nRESOLVED FURTHER THAT any one Director of the Company be and is hereby authorised to do all other acts, things and deeds as may be necessary or incidental for giving effect to this resolution.\"",
+    "minutesGist": "Meeting held on {{meeting_date}} at {{meeting_place}}. The Board considered and approved the appointment of {{director_name}} as {{designation}} with effect from {{effective_date}}, subject to shareholder approval at the ensuing general meeting."
+  },
+  "helpContent": {
+    "remuneration_basis": {
+      "meaning": "How pay and other terms will be determined — the resolution can reference the appointment letter instead of stating figures here.",
+      "tip": "Schedule V caps managerial remuneration where profits are inadequate — flag for a currency check if this applies."
+    }
+  }
+}

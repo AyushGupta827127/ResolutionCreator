@@ -1,0 +1,225 @@
+{
+  "slug": "open-bank-account",
+  "title": "Open a Bank Account",
+  "category": "Board Meeting → Banking",
+  "keywords": [
+    "bank account",
+    "current account",
+    "banking",
+    "signatory",
+    "internet banking"
+  ],
+  "meetingType": "board",
+  "resolutionKind": "board",
+  "description": "Authorises opening a current account for the Company and sets who can operate it, up to what limit, and whether internet banking is enabled.",
+  "complianceRuleIds": [
+    "RULE-BM-01",
+    "RULE-BM-02",
+    "RULE-BM-03",
+    "RULE-BM-06"
+  ],
+  "mcaForms": [],
+  "records": [
+    "Board minutes",
+    "Bank account opening form",
+    "Specimen signature card"
+  ],
+  "questions": [
+    {
+      "id": "q-company-name",
+      "field": "company_name",
+      "label": "Company name",
+      "type": "text",
+      "required": true,
+      "sequence": 1,
+      "section": "Company details",
+      "smartDefault": true,
+      "validation": [
+        {
+          "type": "required"
+        }
+      ]
+    },
+    {
+      "id": "q-cin",
+      "field": "cin",
+      "label": "Corporate Identification Number (CIN)",
+      "type": "text",
+      "required": true,
+      "sequence": 2,
+      "section": "Company details",
+      "smartDefault": true,
+      "validation": [
+        {
+          "type": "format",
+          "rule": "cin",
+          "severity": "warning",
+          "message": "CIN should be 21 characters (e.g. U12345MH2020PTC123456)."
+        }
+      ]
+    },
+    {
+      "id": "q-meeting-date",
+      "field": "meeting_date",
+      "label": "Board meeting date",
+      "type": "date",
+      "required": true,
+      "sequence": 3,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-meeting-place",
+      "field": "meeting_place",
+      "label": "Meeting place",
+      "type": "text",
+      "required": true,
+      "sequence": 4,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-notice-days",
+      "field": "notice_days",
+      "label": "How many clear days' notice was given for this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 5,
+      "section": "Meeting details",
+      "smartDefault": true,
+      "tooltip": "Section 173(3) requires at least 7 clear days' written notice to every director."
+    },
+    {
+      "id": "q-total-directors",
+      "field": "total_directors",
+      "label": "Total strength of the Board",
+      "type": "number",
+      "required": true,
+      "sequence": 6,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-directors-present",
+      "field": "directors_present",
+      "label": "How many directors are present at this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 7,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-bank-name",
+      "field": "bank_name",
+      "label": "Bank name",
+      "type": "text",
+      "required": true,
+      "sequence": 8,
+      "section": "Bank account details",
+      "placeholder": "e.g. HDFC Bank Ltd."
+    },
+    {
+      "id": "q-branch-name",
+      "field": "branch_name",
+      "label": "Branch name",
+      "type": "text",
+      "required": true,
+      "sequence": 9,
+      "section": "Bank account details"
+    },
+    {
+      "id": "q-signatory-several-1",
+      "field": "signatory_several_1",
+      "label": "First director authorised to operate the account severally",
+      "type": "text",
+      "required": true,
+      "sequence": 10,
+      "section": "Signatories"
+    },
+    {
+      "id": "q-signatory-several-2",
+      "field": "signatory_several_2",
+      "label": "Second director authorised to operate the account severally",
+      "type": "text",
+      "required": true,
+      "sequence": 11,
+      "section": "Signatories"
+    },
+    {
+      "id": "q-per-instrument-limit",
+      "field": "per_instrument_limit",
+      "label": "Per-instrument limit for several operation (Rs.)",
+      "type": "number",
+      "required": true,
+      "sequence": 12,
+      "section": "Signatories",
+      "tooltip": "Below this amount, either of the two directors above can sign alone. Above it, joint signatures are required."
+    },
+    {
+      "id": "q-signatory-joint-1",
+      "field": "signatory_joint_1",
+      "label": "First director required for joint signature above the limit",
+      "type": "text",
+      "required": true,
+      "sequence": 13,
+      "section": "Signatories"
+    },
+    {
+      "id": "q-signatory-joint-2",
+      "field": "signatory_joint_2",
+      "label": "Second director required for joint signature above the limit",
+      "type": "text",
+      "required": true,
+      "sequence": 14,
+      "section": "Signatories"
+    },
+    {
+      "id": "q-internet-banking",
+      "field": "internet_banking",
+      "label": "Should Corporate Internet Banking also be authorised?",
+      "type": "radio",
+      "required": true,
+      "sequence": 15,
+      "section": "Signatories",
+      "options": [
+        {
+          "label": "Yes",
+          "value": true
+        },
+        {
+          "label": "No",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "q-roc-jurisdiction",
+      "field": "roc_jurisdiction",
+      "label": "Registrar of Companies (jurisdiction)",
+      "type": "text",
+      "required": false,
+      "sequence": 16,
+      "section": "Filing",
+      "smartDefault": true,
+      "placeholder": "e.g. RoC, Mumbai"
+    }
+  ],
+  "template": {
+    "agendaTitle": "To open bank accounts of the Company",
+    "proposal": "The Company needs a bank account to effectively monitor its finances and cash flows. The Board members discussed and approved the following resolution.",
+    "body": "\"RESOLVED THAT a current account be opened in the name of the Company with M/s. {{bank_name}}, at the {{branch_name}} Branch.\n\nRESOLVED FURTHER THAT Mr./Ms. {{signatory_several_1}} and Mr./Ms. {{signatory_several_2}}, both Directors of the Company, be and hereby are severally authorised to operate the bank account up to and not exceeding Rs. {{per_instrument_limit}}/- per instrument/instruction.\n\nRESOLVED FURTHER THAT Mr./Ms. {{signatory_joint_1}} and Mr./Ms. {{signatory_joint_2}}, both Directors of the Company, be and hereby are jointly authorised to operate the bank account exceeding the amount specified hereinabove.\n\nRESOLVED FURTHER THAT a copy of this resolution be given to the Banker, as may be required, under the seal and signature of any one of the Directors of the Company.{{#if internet_banking}}\n\nRESOLVED FURTHER THAT the Company avails the 'Corporate Internet Banking Service' over the Internet channel and accepts such Terms and Conditions for Corporate Internet Banking as laid down by the bank from time to time for the purpose.\n\nRESOLVED FURTHER THAT Mr./Ms. {{signatory_several_1}} and Mr./Ms. {{signatory_several_2}}, both Directors of the Company, be and are hereby empowered to operate the Company's accounts, to apply for and avail of the 'Corporate Internet Banking' facility offered by the bank, and to do all they have been authorised to do electronically, using their user name and password.{{/if}}\n\nRESOLVED FURTHER THAT any one Director of the Company be and is hereby authorised to file necessary forms with the Registrar of Companies, {{roc_jurisdiction}}, and to make necessary entries in the relevant registers and records of the Company, and to do all such other acts, deeds and things as may be necessary or incidental to give effect to this resolution.\"",
+    "minutesGist": "Meeting held on {{meeting_date}} at {{meeting_place}}. To effectively monitor the Company's finances and cash flows, it was decided to open a bank account with {{bank_name}}, {{branch_name}} Branch. The Board approved the resolution above."
+  },
+  "helpContent": {
+    "per_instrument_limit": {
+      "meaning": "The rupee threshold up to which a single (several) signatory can operate the account alone.",
+      "tip": "Set this to match the company's internal financial-authority matrix, not an arbitrary round number."
+    },
+    "notice_days": {
+      "meaning": "Clear days' notice given to directors before this meeting.",
+      "applicableSection": "Section 173(3)",
+      "tip": "'Clear days' excludes both the day the notice is sent and the day of the meeting."
+    }
+  }
+}

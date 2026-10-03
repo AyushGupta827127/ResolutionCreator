@@ -1,0 +1,151 @@
+{
+  "slug": "change-registered-office-local-limits",
+  "title": "Change Registered Office (Within City)",
+  "category": "Board Meeting → Registered Office",
+  "keywords": [
+    "registered office",
+    "change of address",
+    "section 12",
+    "INC-22",
+    "shift office",
+    "local limits"
+  ],
+  "meetingType": "board",
+  "resolutionKind": "board",
+  "description": "Board approval to shift the registered office to a new address within the same city, town or village.",
+  "complianceRuleIds": [
+    "RULE-BM-01",
+    "RULE-BM-02",
+    "RULE-BM-03",
+    "RULE-BM-06"
+  ],
+  "mcaForms": [
+    "INC-22 (within 30 days of the change)"
+  ],
+  "records": [
+    "Board minutes",
+    "Proof of the new address (utility bill and NOC / lease)",
+    "Updated statutory registers"
+  ],
+  "questions": [
+    {
+      "id": "q-company-name",
+      "field": "company_name",
+      "label": "Company name",
+      "type": "text",
+      "required": true,
+      "sequence": 1,
+      "section": "Company details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-cin",
+      "field": "cin",
+      "label": "Corporate Identification Number (CIN)",
+      "type": "text",
+      "required": true,
+      "sequence": 2,
+      "section": "Company details",
+      "smartDefault": true,
+      "validation": [
+        {
+          "type": "format",
+          "rule": "cin",
+          "severity": "warning",
+          "message": "CIN should be 21 characters (e.g. U12345MH2020PTC123456)."
+        }
+      ]
+    },
+    {
+      "id": "q-meeting-date",
+      "field": "meeting_date",
+      "label": "Board meeting date",
+      "type": "date",
+      "required": true,
+      "sequence": 3,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-meeting-place",
+      "field": "meeting_place",
+      "label": "Meeting place",
+      "type": "text",
+      "required": true,
+      "sequence": 4,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-notice-days",
+      "field": "notice_days",
+      "label": "How many clear days' notice was given for this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 5,
+      "section": "Meeting details",
+      "smartDefault": true,
+      "tooltip": "Section 173(3) requires at least 7 clear days' written notice to every director."
+    },
+    {
+      "id": "q-total-directors",
+      "field": "total_directors",
+      "label": "Total strength of the Board",
+      "type": "number",
+      "required": true,
+      "sequence": 6,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-directors-present",
+      "field": "directors_present",
+      "label": "How many directors are present at this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 7,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-old-address",
+      "field": "old_address",
+      "label": "Current registered office address",
+      "type": "textarea",
+      "required": true,
+      "sequence": 8,
+      "section": "Office details"
+    },
+    {
+      "id": "q-new-address",
+      "field": "new_address",
+      "label": "New registered office address",
+      "type": "textarea",
+      "required": true,
+      "sequence": 9,
+      "section": "Office details"
+    },
+    {
+      "id": "q-effective-date",
+      "field": "effective_date",
+      "label": "Effective date of the change",
+      "type": "date",
+      "required": true,
+      "sequence": 10,
+      "section": "Office details"
+    }
+  ],
+  "template": {
+    "agendaTitle": "To change the registered office of the Company within the local limits of the city",
+    "proposal": "The Board considered shifting the registered office from {{old_address}} to {{new_address}}, within the same city, with effect from {{effective_date}}. The Board members discussed and approved the following resolution.",
+    "body": "\"RESOLVED THAT pursuant to Section 12 of the Companies Act, 2013 and the Companies (Incorporation) Rules, 2014, the registered office of the Company be shifted from {{old_address}} to {{new_address}}, being within the local limits of the same city, town or village, with effect from {{effective_date}}.\n\nRESOLVED FURTHER THAT any one Director or the Company Secretary be and is hereby authorised to file Form INC-22 with the Registrar of Companies within thirty days of the change, along with the required attachments, and to update all statutory records and the Company's letterheads and documents accordingly.\"",
+    "minutesGist": "Meeting held on {{meeting_date}} at {{meeting_place}}. The Board considered shifting the registered office from {{old_address}} to {{new_address}} within the same city with effect from {{effective_date}}, and approved the resolution above."
+  },
+  "helpContent": {
+    "new_address": {
+      "meaning": "The full postal address of the new registered office.",
+      "applicableSection": "Section 12",
+      "tip": "A shift to another city or state needs separate procedures (shareholder approval and, for another state, regional director / NCLT approval) not covered here."
+    }
+  }
+}

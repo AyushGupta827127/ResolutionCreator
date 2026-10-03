@@ -1,0 +1,178 @@
+{
+  "slug": "declare-interim-dividend",
+  "title": "Declare an Interim Dividend",
+  "category": "Board Meeting → Dividend",
+  "keywords": [
+    "dividend",
+    "interim dividend",
+    "section 123",
+    "shareholders",
+    "profits"
+  ],
+  "meetingType": "board",
+  "resolutionKind": "board",
+  "description": "Board declaration of an interim dividend out of the current year's profits, with record and payment dates.",
+  "complianceRuleIds": [
+    "RULE-BM-01",
+    "RULE-BM-02",
+    "RULE-BM-03",
+    "RULE-BM-06"
+  ],
+  "mcaForms": [],
+  "records": [
+    "Board minutes",
+    "Separate dividend bank account (Section 123(4))",
+    "Register of members as on the record date"
+  ],
+  "questions": [
+    {
+      "id": "q-company-name",
+      "field": "company_name",
+      "label": "Company name",
+      "type": "text",
+      "required": true,
+      "sequence": 1,
+      "section": "Company details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-cin",
+      "field": "cin",
+      "label": "Corporate Identification Number (CIN)",
+      "type": "text",
+      "required": true,
+      "sequence": 2,
+      "section": "Company details",
+      "smartDefault": true,
+      "validation": [
+        {
+          "type": "format",
+          "rule": "cin",
+          "severity": "warning",
+          "message": "CIN should be 21 characters (e.g. U12345MH2020PTC123456)."
+        }
+      ]
+    },
+    {
+      "id": "q-meeting-date",
+      "field": "meeting_date",
+      "label": "Board meeting date",
+      "type": "date",
+      "required": true,
+      "sequence": 3,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-meeting-place",
+      "field": "meeting_place",
+      "label": "Meeting place",
+      "type": "text",
+      "required": true,
+      "sequence": 4,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-notice-days",
+      "field": "notice_days",
+      "label": "How many clear days' notice was given for this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 5,
+      "section": "Meeting details",
+      "smartDefault": true,
+      "tooltip": "Section 173(3) requires at least 7 clear days' written notice to every director."
+    },
+    {
+      "id": "q-total-directors",
+      "field": "total_directors",
+      "label": "Total strength of the Board",
+      "type": "number",
+      "required": true,
+      "sequence": 6,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-directors-present",
+      "field": "directors_present",
+      "label": "How many directors are present at this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 7,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-dividend-per-share",
+      "field": "dividend_per_share",
+      "label": "Interim dividend per equity share (Rs.)",
+      "type": "number",
+      "required": true,
+      "sequence": 8,
+      "section": "Dividend details"
+    },
+    {
+      "id": "q-face-value",
+      "field": "face_value",
+      "label": "Face value per equity share (Rs.)",
+      "type": "number",
+      "required": true,
+      "sequence": 9,
+      "section": "Dividend details"
+    },
+    {
+      "id": "q-total-dividend-amount",
+      "field": "total_dividend_amount",
+      "label": "Total dividend payout (Rs.)",
+      "type": "number",
+      "required": true,
+      "sequence": 10,
+      "section": "Dividend details"
+    },
+    {
+      "id": "q-funding-source",
+      "field": "funding_source",
+      "label": "Source of funds",
+      "type": "text",
+      "required": true,
+      "sequence": 11,
+      "section": "Dividend details",
+      "placeholder": "e.g. profits of the current financial year",
+      "tooltip": "Section 123(3) allows an interim dividend out of the profits of the financial year in which it is declared."
+    },
+    {
+      "id": "q-record-date",
+      "field": "record_date",
+      "label": "Record date",
+      "type": "date",
+      "required": true,
+      "sequence": 12,
+      "section": "Dates"
+    },
+    {
+      "id": "q-payment-date",
+      "field": "payment_date",
+      "label": "Payment date",
+      "type": "date",
+      "required": true,
+      "sequence": 13,
+      "section": "Dates",
+      "tooltip": "Dividend must be paid within 30 days of declaration (Section 127)."
+    }
+  ],
+  "template": {
+    "agendaTitle": "To declare an interim dividend of Rs. {{dividend_per_share}} per equity share",
+    "proposal": "The Board considered declaring an interim dividend of Rs. {{dividend_per_share}} per equity share of face value Rs. {{face_value}}, totalling Rs. {{total_dividend_amount}}. The Board members discussed and approved the following resolution.",
+    "body": "\"RESOLVED THAT pursuant to Section 123(3) of the Companies Act, 2013 and the Companies (Declaration and Payment of Dividend) Rules, 2014, an interim dividend of Rs. {{dividend_per_share}} per equity share of face value Rs. {{face_value}}, aggregating Rs. {{total_dividend_amount}}, be and is hereby declared out of {{funding_source}}, to the members whose names appear in the Register of Members on {{record_date}} (the record date).\n\nRESOLVED FURTHER THAT the interim dividend be paid on or before {{payment_date}}, and that the amount be deposited in a separate bank account within five days of declaration, as required by Section 123(4) of the Companies Act, 2013.\n\nRESOLVED FURTHER THAT any one Director or the Company Secretary be and is hereby authorised to do all acts necessary to give effect to this resolution.\"",
+    "minutesGist": "Meeting held on {{meeting_date}} at {{meeting_place}}. The Board considered the declaration of an interim dividend of Rs. {{dividend_per_share}} per equity share (total Rs. {{total_dividend_amount}}) out of {{funding_source}}, with record date {{record_date}} and payment by {{payment_date}}, and approved the resolution above."
+  },
+  "helpContent": {
+    "funding_source": {
+      "meaning": "The profits from which the interim dividend is paid.",
+      "applicableSection": "Section 123(3)",
+      "tip": "Confirm the Board has reviewed management accounts showing sufficient profits for the year so far."
+    }
+  }
+}

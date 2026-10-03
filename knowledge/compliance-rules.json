@@ -1,0 +1,56 @@
+[
+  {
+    "id": "RULE-BM-01",
+    "title": "Board meeting notice period",
+    "section": "Section 173(3); SS-1",
+    "rule": "Not less than 7 clear days' written notice must be given to every director at their registered address (hand delivery, post, or electronic means).",
+    "severity": "warning",
+    "message": "Board meeting notice period is less than 7 clear days. This is only permitted for urgent business if at least one independent director is present at the meeting (or, if none was present, ratification by at least one independent director after the meeting).",
+    "recommendation": "Short notice is allowed only for urgent business with an independent director present (or later ratified by one). Confirm that condition is met, then acknowledge to continue — otherwise extend the notice period."
+  },
+  {
+    "id": "RULE-BM-02",
+    "title": "Board meeting frequency",
+    "section": "Section 173(1); SEBI (LODR) Regulations, 2015, Reg. 17(2)",
+    "rule": "Minimum 4 board meetings per calendar year; gap between two consecutive meetings must not exceed 120 days (listed companies: same cap). OPC / small / dormant / start-up private companies: minimum 1 meeting per half-year, gap ≥ 90 days.",
+    "severity": "information",
+    "message": "Reminder: this meeting must fall within the 120-day maximum interval (or the applicable relaxed interval) since the company's last board meeting.",
+    "recommendation": "Confirm this against the company's board-meeting calendar before finalising."
+  },
+  {
+    "id": "RULE-BM-03",
+    "title": "Quorum",
+    "section": "Section 174(1), 174(3); SS-1",
+    "rule": "Quorum = one-third of total strength of the Board OR two directors, whichever is higher, after excluding interested directors where required (minimum 2 non-interested directors if interested directors are excluded).",
+    "severity": "critical",
+    "message": "Quorum may not be met for this meeting — one-third of the Board or two directors, whichever is higher, must be present after excluding any interested director.",
+    "recommendation": "Recompute quorum after applying the interested-director exclusion under Section 184, then confirm before finalising minutes/resolution."
+  },
+  {
+    "id": "RULE-BM-04",
+    "title": "Interested director disclosure & participation",
+    "section": "Section 184; Section 174(3) and exemption notifications",
+    "rule": "A director with a personal interest in the matter must disclose that interest under Section 184 before the resolution is treated as validly passed.",
+    "severity": "warning",
+    "message": "A director with a personal interest in this matter has not been recorded as having disclosed that interest.",
+    "recommendation": "Obtain and record the disclosure before the resolution is treated as validly passed."
+  },
+  {
+    "id": "RULE-BM-05",
+    "title": "Resolution by circulation",
+    "section": "Section 175(1)",
+    "rule": "A circulated resolution must be approved by a majority of directors entitled to vote, and must be noted at the next Board meeting and entered in the minutes of that meeting.",
+    "severity": "warning",
+    "message": "Confirm this resolution will be tabled and noted at the next physical/VC Board meeting — a circulated resolution is not self-standing in the minute books.",
+    "recommendation": "Add a calendar reminder to note the circulated resolution at the next meeting."
+  },
+  {
+    "id": "RULE-BM-06",
+    "title": "Minutes entry timing",
+    "section": "SS-1; ICSI guidance illustrations",
+    "rule": "Minutes should be entered/circulated promptly after the meeting.",
+    "severity": "information",
+    "message": "Reminder: ensure minutes are entered in the minutes book and circulated within the professionally accepted timeframe.",
+    "recommendation": "Track the minutes-entry date against the meeting date."
+  }
+]

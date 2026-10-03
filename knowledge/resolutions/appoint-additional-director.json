@@ -1,0 +1,237 @@
+{
+  "slug": "appoint-additional-director",
+  "title": "Appoint an Additional Director",
+  "category": "Board Meeting → Directors & KMP",
+  "keywords": [
+    "additional director",
+    "DIN",
+    "DIR-2",
+    "appoint director",
+    "board induction"
+  ],
+  "meetingType": "board",
+  "resolutionKind": "board",
+  "description": "Inducts a new director onto the Board between two AGMs, to hold office until the next AGM.",
+  "complianceRuleIds": [
+    "RULE-BM-01",
+    "RULE-BM-02",
+    "RULE-BM-03",
+    "RULE-BM-06"
+  ],
+  "mcaForms": [
+    "DIR-12"
+  ],
+  "records": [
+    "Board minutes",
+    "Form DIR-2 consent",
+    "Register of Directors and KMP"
+  ],
+  "questions": [
+    {
+      "id": "q-company-name",
+      "field": "company_name",
+      "label": "Company name",
+      "type": "text",
+      "required": true,
+      "sequence": 1,
+      "section": "Company details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-cin",
+      "field": "cin",
+      "label": "Corporate Identification Number (CIN)",
+      "type": "text",
+      "required": true,
+      "sequence": 2,
+      "section": "Company details",
+      "smartDefault": true,
+      "validation": [
+        {
+          "type": "format",
+          "rule": "cin",
+          "severity": "warning",
+          "message": "CIN should be 21 characters."
+        }
+      ]
+    },
+    {
+      "id": "q-meeting-date",
+      "field": "meeting_date",
+      "label": "Board meeting date",
+      "type": "date",
+      "required": true,
+      "sequence": 3,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-meeting-place",
+      "field": "meeting_place",
+      "label": "Meeting place",
+      "type": "text",
+      "required": true,
+      "sequence": 4,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-notice-days",
+      "field": "notice_days",
+      "label": "How many clear days' notice was given for this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 5,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-total-directors",
+      "field": "total_directors",
+      "label": "Total strength of the Board",
+      "type": "number",
+      "required": true,
+      "sequence": 6,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-directors-present",
+      "field": "directors_present",
+      "label": "How many directors are present at this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 7,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-director-name",
+      "field": "director_name",
+      "label": "Proposed director's full name",
+      "type": "text",
+      "required": true,
+      "sequence": 8,
+      "section": "Director details"
+    },
+    {
+      "id": "q-din-known",
+      "field": "din_known",
+      "label": "Does the proposed director already have a DIN?",
+      "type": "radio",
+      "required": true,
+      "sequence": 9,
+      "section": "Director details",
+      "options": [
+        {
+          "label": "Yes",
+          "value": true
+        },
+        {
+          "label": "No — needs to be applied for",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "q-din",
+      "field": "din",
+      "label": "Director Identification Number (DIN)",
+      "type": "text",
+      "required": true,
+      "sequence": 10,
+      "section": "Director details",
+      "conditions": [
+        {
+          "field": "din_known",
+          "operator": "eq",
+          "value": true
+        }
+      ],
+      "validation": [
+        {
+          "type": "format",
+          "rule": "din",
+          "severity": "critical",
+          "message": "DIN must be exactly 8 digits."
+        }
+      ]
+    },
+    {
+      "id": "q-qualifications",
+      "field": "qualifications",
+      "label": "Qualifications",
+      "type": "text",
+      "required": true,
+      "sequence": 11,
+      "section": "Director details",
+      "placeholder": "e.g. B.Com, ACA"
+    },
+    {
+      "id": "q-experience-years",
+      "field": "experience_years",
+      "label": "Years of relevant experience",
+      "type": "number",
+      "required": true,
+      "sequence": 12,
+      "section": "Director details"
+    },
+    {
+      "id": "q-experience-field",
+      "field": "experience_field",
+      "label": "Field of experience",
+      "type": "text",
+      "required": true,
+      "sequence": 13,
+      "section": "Director details",
+      "placeholder": "e.g. corporate finance"
+    },
+    {
+      "id": "q-article-number",
+      "field": "article_number",
+      "label": "Article of the AOA authorising appointment of additional directors",
+      "type": "text",
+      "required": true,
+      "sequence": 14,
+      "section": "Authorisation",
+      "placeholder": "e.g. Article 62"
+    },
+    {
+      "id": "q-effective-date",
+      "field": "effective_date",
+      "label": "Appointment effective date",
+      "type": "date",
+      "required": true,
+      "sequence": 15,
+      "section": "Authorisation",
+      "smartDefault": true
+    },
+    {
+      "id": "q-roc-jurisdiction",
+      "field": "roc_jurisdiction",
+      "label": "Registrar of Companies (jurisdiction)",
+      "type": "text",
+      "required": false,
+      "sequence": 16,
+      "section": "Filing",
+      "smartDefault": true
+    }
+  ],
+  "template": {
+    "agendaTitle": "To appoint an Additional Director",
+    "proposal": "It is proposed to induct {{director_name}} as an Additional Director of the Company. {{director_name}}, ({{qualifications}}), having more than {{experience_years}} years of experience in the field of {{experience_field}}, has consented to act as Director of the Company.{{#if din}} Their Director Identification Number is {{din}}.{{/if}} The Board members discussed and approved the following resolution.",
+    "body": "\"RESOLVED THAT the Board of Directors do and hereby take on record the Consent received in Form DIR-2 from {{director_name}}{{#if din}}, holding DIN {{din}},{{/if}} to act as Director of the Company.\n\nRESOLVED FURTHER THAT pursuant to the provisions of Section 161(1) of the Companies Act, 2013 read with the Companies (Appointment and Qualification of Directors) Rules, 2014, and in terms of {{article_number}} of the Articles of Association of the Company, {{director_name}} be and is hereby appointed as an Additional Director of the Company with effect from {{effective_date}}, to hold office as such until the conclusion of the next Annual General Meeting of the Company.\n\nRESOLVED FURTHER THAT the Directors be and are hereby severally authorised to file the relevant e-form with the Registrar of Companies, {{roc_jurisdiction}}, and to do all such acts, deeds or things as are necessary to give effect to the above resolution, including making the necessary entries in the Register of Directors of the Company.\"",
+    "minutesGist": "Meeting held on {{meeting_date}} at {{meeting_place}}. The Board noted the proposal to induct {{director_name}} as an Additional Director of the Company, noting their qualifications ({{qualifications}}) and {{experience_years}} years of experience in {{experience_field}}. The Board discussed and approved the resolution above."
+  },
+  "helpContent": {
+    "din": {
+      "meaning": "The 8-digit Director Identification Number issued by the MCA.",
+      "applicableSection": "Section 153, 154",
+      "tip": "If the proposed director has no DIN yet, DIR-3 must be filed before this resolution can be acted on — note that as a follow-up."
+    },
+    "article_number": {
+      "meaning": "The AOA clause that empowers the Board to appoint additional directors between AGMs.",
+      "applicableSection": "Section 161(1)"
+    }
+  }
+}

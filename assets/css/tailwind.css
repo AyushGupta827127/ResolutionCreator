@@ -1,0 +1,231 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-white text-ink-950 font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif text-ink-950;
+  }
+  ::selection {
+    @apply bg-orange-200 text-ink-950;
+  }
+  *:focus-visible {
+    @apply outline-none ring-2 ring-orange-400 ring-offset-2 ring-offset-white;
+  }
+  /* Slim, quiet scrollbar — Webkit + Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: theme("colors.ink.200") transparent;
+  }
+  *::-webkit-scrollbar { width: 8px; height: 8px; }
+  *::-webkit-scrollbar-thumb { background: theme("colors.ink.200"); border-radius: 999px; }
+  *::-webkit-scrollbar-thumb:hover { background: theme("colors.ink.300"); }
+}
+
+@layer utilities {
+  .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; width: 0; height: 0; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-ink-950 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_1px_2px_rgba(30,27,75,0.2)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-ink-900 hover:shadow-lg active:translate-y-0 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-40 disabled:hover:translate-y-0;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink-200 bg-white/80 px-5 py-2.5 text-sm font-semibold text-ink-800 backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:border-ink-300 hover:bg-white hover:shadow-md active:translate-y-0 disabled:pointer-events-none disabled:opacity-40 disabled:hover:translate-y-0;
+  }
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_1px_2px_rgba(194,65,12,0.25)] transition-colors duration-150 hover:bg-orange-600 active:bg-orange-700 disabled:pointer-events-none disabled:opacity-40;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium text-ink-500 transition-colors hover:bg-ink-50 hover:text-ink-800;
+  }
+
+  .card {
+    @apply rounded-xl border border-ink-100 bg-white shadow-card transition-shadow duration-150;
+  }
+  .card-hover {
+    @apply hover:border-ink-200 hover:shadow-card-hover;
+  }
+
+  /* Lifecycle status of a resolution — Draft / Ready for review / Completed */
+  .status-draft { @apply bg-gray-100 text-ink-600 ring-1 ring-inset ring-gray-200; }
+  .status-review { @apply bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-100; }
+  .status-completed { @apply bg-green-50 text-green-700 ring-1 ring-inset ring-green-100; }
+
+  /* Compliance severity — Pass (green) / Review (amber) / Information (neutral).
+     Orange stays reserved for brand accents/CTAs, not status color. */
+  .severity-pass { @apply border-green-100 bg-green-50/40; }
+  .severity-review { @apply border-amber-100 bg-amber-50/40; }
+  .severity-information { @apply border-ink-100 bg-white; }
+
+  .field-input {
+    @apply w-full rounded-xl border border-ink-200 bg-white px-3.5 py-2.5 text-base text-ink-900 shadow-sm transition-all duration-150 placeholder:text-[#98A2B3] hover:border-ink-300 focus:border-ink-500 focus:outline-none focus:ring-4 focus:ring-ink-100;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold;
+  }
+  .badge-critical { @apply bg-red-50 text-red-700 ring-1 ring-inset ring-red-100; }
+  .badge-warning { @apply bg-amber-50 text-amber-800 ring-1 ring-inset ring-amber-100; }
+  .badge-information { @apply bg-ink-50 text-ink-700 ring-1 ring-inset ring-ink-100; }
+  .badge-info { @apply bg-ink-50 text-ink-700 ring-1 ring-inset ring-ink-100; }
+
+  /* A generated document rendered as if it were a physical printed page. */
+  .paper {
+    @apply relative rounded-lg bg-white shadow-paper;
+    background-image: linear-gradient(180deg, rgba(30,27,75,0.015), transparent 8px);
+  }
+  .paper::before {
+    content: "";
+    @apply pointer-events-none absolute inset-0 rounded-lg ring-1 ring-inset ring-ink-950/5;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden rounded-lg bg-ink-100/70;
+  }
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full bg-shimmer animate-shimmer;
+  }
+
+  .link-underline {
+    @apply relative text-ink-700 transition-colors hover:text-ink-950;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-0.5 left-0 h-px w-0 bg-current transition-all duration-200;
+  }
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Wizard question transition */
+.q-enter-active, .q-leave-active {
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.q-enter-from {
+  opacity: 0;
+  transform: translateX(16px);
+}
+.q-leave-to {
+  opacity: 0;
+  transform: translateX(-16px);
+}
+
+/* Simple fade for phase changes */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+
+/* Printing the generated document: only #print-area, no chrome, no shadows */
+/* ======================= PRINT =======================
+   Printing builds a #print-root copy of just the document (see printDocument in pages/r/[slug].vue)
+   and hides everything else, so the app chrome never takes part in pagination.
+   The rules mirror the server PDF / Word layout: A4, 25.4 mm margins, serif 12 pt, justified. */
+@page {
+  size: A4;
+  margin: 25.4mm 25.4mm 22mm;
+  @bottom-left {
+    content: "Draft for professional review";
+    font: 8pt "Times New Roman", serif;
+    color: #6b7280;
+  }
+  @bottom-right {
+    content: "Page " counter(page) " of " counter(pages);
+    font: 8pt "Times New Roman", serif;
+    color: #6b7280;
+  }
+}
+@media print {
+  html.printing,
+  html.printing body {
+    background: #fff !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  html.printing body > *:not(#print-root) {
+    display: none !important;
+  }
+  #print-root {
+    display: block !important;
+    color: #000;
+  }
+  #print-root .doc-section {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  #print-root .doc-section::before {
+    display: none !important;
+  }
+  #print-root .doc-section[data-break="true"] {
+    break-before: page;
+  }
+  #print-root .doc-label {
+    display: none !important;
+  }
+  #print-root .doc-para {
+    font-size: 12pt;
+    line-height: 1.5;
+    margin: 0 0 9pt;
+    orphans: 3;
+    widows: 3;
+    color: #000;
+  }
+  #print-root .doc-before-sig {
+    break-after: avoid;
+  }
+  #print-root .doc-title {
+    font-size: 13pt;
+    break-after: avoid;
+    margin: 4pt 0 12pt;
+  }
+  #print-root .doc-title-underline {
+    font-size: 14pt;
+  }
+  #print-root .doc-heading {
+    font-size: 12pt;
+    break-after: avoid;
+    margin: 14pt 0 6pt;
+  }
+  #print-root .doc-letterhead {
+    break-inside: avoid;
+    break-after: avoid;
+    font-size: 10pt;
+    margin-bottom: 14pt;
+  }
+  #print-root .doc-letterhead-name {
+    font-size: 15pt;
+  }
+  #print-root .doc-signature {
+    break-inside: avoid;
+    margin-left: 52%;
+    font-size: 12pt;
+    margin-top: 14pt;
+  }
+  #print-root .doc-sig-rule {
+    height: 26pt;
+  }
+}
+

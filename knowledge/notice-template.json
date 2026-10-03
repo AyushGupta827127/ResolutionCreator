@@ -1,0 +1,9 @@
+{
+  "id": "notice-standard",
+  "title": "Notice of Meeting",
+  "note": "Board-meeting notices only (Section 173(3)). General-meeting notices carry different requirements (Section 101) and are out of scope for now.",
+  "questions": [
+    { "id": "q-notice-meeting-time", "field": "meeting_time", "label": "Meeting time", "type": "text", "required": true, "sequence": 1, "smartDefault": true, "placeholder": "e.g. 11:00 AM" }
+  ],
+  "body": "NOTICE\n\nNotice is hereby given that a meeting of the Board of Directors of {{company_name}} will be held on {{meeting_date}} at {{meeting_time}} at {{meeting_place}}, to transact the following business:\n\n{{agenda_title}}\n\n{{#if notice_days}}This notice is given in compliance with the {{notice_days}}-day notice requirement under Section 173(3) of the Companies Act, 2013.{{/if}}\n\nBy Order of the Board\nFor {{company_name}}\n\n_______________________\nDirector / Company Secretary"
+}

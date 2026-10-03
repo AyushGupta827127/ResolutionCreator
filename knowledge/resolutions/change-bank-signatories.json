@@ -1,0 +1,206 @@
+{
+  "slug": "change-bank-signatories",
+  "title": "Change Authorised Bank Signatories",
+  "category": "Board Meeting → Banking",
+  "keywords": [
+    "bank signatory",
+    "change signatory",
+    "banking",
+    "authorised signatory",
+    "cheques"
+  ],
+  "meetingType": "board",
+  "resolutionKind": "board",
+  "description": "Adds, removes, or replaces the directors/officers authorised to operate an existing company bank account.",
+  "complianceRuleIds": [
+    "RULE-BM-01",
+    "RULE-BM-02",
+    "RULE-BM-03",
+    "RULE-BM-06"
+  ],
+  "mcaForms": [],
+  "records": [
+    "Board minutes",
+    "Bank's signatory change form"
+  ],
+  "questions": [
+    {
+      "id": "q-company-name",
+      "field": "company_name",
+      "label": "Company name",
+      "type": "text",
+      "required": true,
+      "sequence": 1,
+      "section": "Company details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-cin",
+      "field": "cin",
+      "label": "Corporate Identification Number (CIN)",
+      "type": "text",
+      "required": true,
+      "sequence": 2,
+      "section": "Company details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-meeting-date",
+      "field": "meeting_date",
+      "label": "Board meeting date",
+      "type": "date",
+      "required": true,
+      "sequence": 3,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-meeting-place",
+      "field": "meeting_place",
+      "label": "Meeting place",
+      "type": "text",
+      "required": true,
+      "sequence": 4,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-notice-days",
+      "field": "notice_days",
+      "label": "How many clear days' notice was given for this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 5,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-total-directors",
+      "field": "total_directors",
+      "label": "Total strength of the Board",
+      "type": "number",
+      "required": true,
+      "sequence": 6,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-directors-present",
+      "field": "directors_present",
+      "label": "How many directors are present at this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 7,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-bank-name",
+      "field": "bank_name",
+      "label": "Bank name",
+      "type": "text",
+      "required": true,
+      "sequence": 8,
+      "section": "Account details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-branch-name",
+      "field": "branch_name",
+      "label": "Branch name",
+      "type": "text",
+      "required": true,
+      "sequence": 9,
+      "section": "Account details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-account-number",
+      "field": "account_number",
+      "label": "Account number (last 4 digits are fine)",
+      "type": "text",
+      "required": true,
+      "sequence": 10,
+      "section": "Account details"
+    },
+    {
+      "id": "q-change-type",
+      "field": "change_type",
+      "label": "What's changing?",
+      "type": "select",
+      "required": true,
+      "sequence": 11,
+      "section": "Change details",
+      "options": [
+        {
+          "label": "Add a new signatory",
+          "value": "add"
+        },
+        {
+          "label": "Remove an existing signatory",
+          "value": "remove"
+        },
+        {
+          "label": "Replace an existing signatory",
+          "value": "replace"
+        }
+      ]
+    },
+    {
+      "id": "q-signatory-name",
+      "field": "signatory_name",
+      "label": "Name of the signatory being added/removed/replaced",
+      "type": "text",
+      "required": true,
+      "sequence": 12,
+      "section": "Change details"
+    },
+    {
+      "id": "q-signatory-designation",
+      "field": "signatory_designation",
+      "label": "Their designation",
+      "type": "text",
+      "required": true,
+      "sequence": 13,
+      "section": "Change details"
+    },
+    {
+      "id": "q-outgoing-signatory",
+      "field": "outgoing_signatory_name",
+      "label": "Name of the signatory being replaced",
+      "type": "text",
+      "required": true,
+      "sequence": 14,
+      "section": "Change details",
+      "conditions": [
+        {
+          "field": "change_type",
+          "operator": "eq",
+          "value": "replace"
+        }
+      ]
+    },
+    {
+      "id": "q-roc-jurisdiction",
+      "field": "roc_jurisdiction",
+      "label": "Registrar of Companies (jurisdiction)",
+      "type": "text",
+      "required": false,
+      "sequence": 15,
+      "section": "Filing",
+      "smartDefault": true
+    }
+  ],
+  "template": {
+    "agendaTitle": "To change the authorised signatories on the Company's bank account",
+    "proposal": "It is proposed to update the list of persons authorised to operate the Company's account with {{bank_name}}, {{branch_name}} Branch (A/c no. ending {{account_number}}). The Board members discussed and approved the following resolution.",
+    "body": "\"RESOLVED THAT pursuant to Section 179 of the Companies Act, 2013 and the Articles of Association of the Company, {{signatory_name}}, {{signatory_designation}}, be and is hereby {{#if outgoing_signatory_name}}substituted in place of {{outgoing_signatory_name}} as an{{else}}{{change_type}}ed as a{{/if}} authorised signatory for operating the Company's account with {{bank_name}}, {{branch_name}} Branch.\n\nRESOLVED FURTHER THAT the Bank be and is hereby requested to note this change and to honour cheques, instruments and instructions signed accordingly, and to disregard the authority of any signatory so removed with immediate effect.\n\nRESOLVED FURTHER THAT any one Director of the Company be and is hereby authorised to sign and submit the Bank's own signatory-change form and any other document required to give effect to this resolution, and to file necessary forms with the Registrar of Companies, {{roc_jurisdiction}}, if applicable.\"",
+    "minutesGist": "Meeting held on {{meeting_date}} at {{meeting_place}}. The Board approved a change to the authorised signatories on the Company's account with {{bank_name}}, {{branch_name}} Branch, as set out in the resolution above."
+  },
+  "helpContent": {
+    "change_type": {
+      "meaning": "Whether a signatory is being added, removed, or swapped for another.",
+      "tip": "Most banks require their own signatory-change form in addition to a certified copy of this resolution — check the bank's specific requirement before submission."
+    }
+  }
+}

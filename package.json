@@ -1,0 +1,38 @@
+{
+  "name": "resolution-creator",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "start": "cross-env NITRO_HOST=0.0.0.0 NITRO_PORT=7300 nuxt start",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "test:static": "node tests/static-templates.test.mjs && node tests/icons.test.mjs && node tests/document-model.test.mjs",
+    "test:api": "node tests/api-generation.test.mjs && node tests/api-business-rules.test.mjs && node tests/security.test.mjs",
+    "test:documents": "node tests/documents/make-payloads.mjs && python tests/documents/bulk.py"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "@nuxt/icon": "^1.14.0",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "@pinia/nuxt": "^0.11.1",
+    "bcrypt": "^6.0.0",
+    "docx": "^9.1.1",
+    "firebase": "^11.9.1",
+    "firebase-admin": "^13.6.0",
+    "handlebars": "^4.7.8",
+    "nodemailer": "^7.0.4",
+    "nuxt": "^3.17.5",
+    "pdfkit": "^0.20.2",
+    "pinia": "^3.0.3",
+    "razorpay": "^2.9.6",
+    "vue": "^3.5.17",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@iconify-json/ph": "^1.2.2",
+    "cross-env": "^7.0.3"
+  }
+}

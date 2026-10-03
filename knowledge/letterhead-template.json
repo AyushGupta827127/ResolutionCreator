@@ -1,0 +1,13 @@
+{
+  "id": "letterhead-standard",
+  "title": "Company Letterhead",
+  "questions": [
+    { "id": "q-lh-email", "field": "company_email", "label": "Company email", "type": "email", "required": false, "sequence": 1, "smartDefault": true },
+    { "id": "q-lh-website", "field": "company_website", "label": "Website", "type": "text", "required": false, "sequence": 2, "smartDefault": true },
+    { "id": "q-lh-phone", "field": "company_phone", "label": "Phone", "type": "phone", "required": false, "sequence": 3, "smartDefault": true },
+    { "id": "q-lh-address", "field": "registered_office", "label": "Registered office address", "type": "textarea", "required": true, "sequence": 4, "smartDefault": true }
+  ],
+  "body": "{{company_name}}\nCIN: {{cin}}{{#if company_email}}   E-Mail: {{company_email}}{{/if}}\n\nReg Office: {{registered_office}}",
+  "prompt": "How would you like to print this document? (a) I already have a company letterhead — skip generation. (b) Generate a professional letterhead using the company information already on file.",
+  "note": "Only asks for a field if it isn't already known from earlier answers in the session; CIN and registered office are the only two that block generation if missing."
+}

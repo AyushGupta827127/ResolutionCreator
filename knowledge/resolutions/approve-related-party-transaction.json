@@ -1,0 +1,203 @@
+{
+  "slug": "approve-related-party-transaction",
+  "title": "Approve a Related-Party Transaction",
+  "category": "Board Meeting → Directors & KMP",
+  "keywords": [
+    "related party",
+    "RPT",
+    "section 188",
+    "contract",
+    "arrangement",
+    "interested director"
+  ],
+  "meetingType": "board",
+  "resolutionKind": "board",
+  "description": "Board approval for a contract or arrangement with a related party, with the interested-director disclosure this specifically requires.",
+  "complianceRuleIds": [
+    "RULE-BM-01",
+    "RULE-BM-02",
+    "RULE-BM-03",
+    "RULE-BM-04",
+    "RULE-BM-06"
+  ],
+  "involvesRelatedParty": true,
+  "mcaForms": [
+    "MGT-14 (if applicable)"
+  ],
+  "records": [
+    "Board minutes",
+    "Register of Contracts under Section 189",
+    "Audit Committee approval (if applicable)"
+  ],
+  "questions": [
+    {
+      "id": "q-company-name",
+      "field": "company_name",
+      "label": "Company name",
+      "type": "text",
+      "required": true,
+      "sequence": 1,
+      "section": "Company details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-cin",
+      "field": "cin",
+      "label": "Corporate Identification Number (CIN)",
+      "type": "text",
+      "required": true,
+      "sequence": 2,
+      "section": "Company details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-meeting-date",
+      "field": "meeting_date",
+      "label": "Board meeting date",
+      "type": "date",
+      "required": true,
+      "sequence": 3,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-meeting-place",
+      "field": "meeting_place",
+      "label": "Meeting place",
+      "type": "text",
+      "required": true,
+      "sequence": 4,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-notice-days",
+      "field": "notice_days",
+      "label": "How many clear days' notice was given for this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 5,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-total-directors",
+      "field": "total_directors",
+      "label": "Total strength of the Board",
+      "type": "number",
+      "required": true,
+      "sequence": 6,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-directors-present",
+      "field": "directors_present",
+      "label": "How many directors are present at this meeting?",
+      "type": "number",
+      "required": true,
+      "sequence": 7,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-related-party-name",
+      "field": "related_party_name",
+      "label": "Related party's name",
+      "type": "text",
+      "required": true,
+      "sequence": 8,
+      "section": "Transaction details"
+    },
+    {
+      "id": "q-relationship-nature",
+      "field": "relationship_nature",
+      "label": "Nature of relationship",
+      "type": "text",
+      "required": true,
+      "sequence": 9,
+      "section": "Transaction details",
+      "placeholder": "e.g. director's relative, group company"
+    },
+    {
+      "id": "q-transaction-nature",
+      "field": "transaction_nature",
+      "label": "Nature of the transaction",
+      "type": "text",
+      "required": true,
+      "sequence": 10,
+      "section": "Transaction details",
+      "placeholder": "e.g. sale of goods, leave and licence of premises"
+    },
+    {
+      "id": "q-transaction-value",
+      "field": "transaction_value",
+      "label": "Transaction value (Rs.)",
+      "type": "number",
+      "required": true,
+      "sequence": 11,
+      "section": "Transaction details"
+    },
+    {
+      "id": "q-transaction-terms",
+      "field": "transaction_terms",
+      "label": "Key terms (price, duration, etc.)",
+      "type": "textarea",
+      "required": true,
+      "sequence": 12,
+      "section": "Transaction details"
+    },
+    {
+      "id": "q-interested-director",
+      "field": "interested_director_name",
+      "label": "Name of the interested director (if any)",
+      "type": "text",
+      "required": false,
+      "sequence": 13,
+      "section": "Disclosure",
+      "tooltip": "Leave blank if no director has a personal interest in this transaction."
+    },
+    {
+      "id": "q-interest-disclosed",
+      "field": "interest_disclosed",
+      "label": "Has the interested director's disclosure of interest been recorded?",
+      "type": "radio",
+      "required": true,
+      "sequence": 14,
+      "section": "Disclosure",
+      "options": [
+        {
+          "label": "Yes, recorded",
+          "value": true
+        },
+        {
+          "label": "No / not applicable",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "q-roc-jurisdiction",
+      "field": "roc_jurisdiction",
+      "label": "Registrar of Companies (jurisdiction)",
+      "type": "text",
+      "required": false,
+      "sequence": 15,
+      "section": "Filing",
+      "smartDefault": true
+    }
+  ],
+  "template": {
+    "agendaTitle": "To approve a related-party transaction with {{related_party_name}}",
+    "proposal": "The Company proposes to enter into a transaction of {{transaction_nature}} with {{related_party_name}} ({{relationship_nature}}), valued at Rs. {{transaction_value}}, on the terms set out below. The Board members discussed and approved the following resolution.",
+    "body": "\"RESOLVED THAT pursuant to the provisions of Section 188 of the Companies Act, 2013 and the Companies (Meetings of Board and its Powers) Rules, 2014, and subject to such other approvals as may be required, the consent of the Board be and is hereby accorded for the Company to enter into the following transaction with {{related_party_name}}, a related party by virtue of {{relationship_nature}}: {{transaction_nature}}, valued at Rs. {{transaction_value}}, on the following terms: {{transaction_terms}}.\n\nRESOLVED FURTHER THAT any one Director of the Company be and is hereby authorised to negotiate, finalise and execute all documents necessary to give effect to this transaction and to file necessary forms with the Registrar of Companies, {{roc_jurisdiction}}.\n\nRESOLVED FURTHER THAT any one Director or the Company Secretary be and is hereby authorised to make necessary entries in the Register of Contracts maintained under Section 189 of the Companies Act, 2013.\"",
+    "minutesGist": "Meeting held on {{meeting_date}} at {{meeting_place}}. The Board considered a proposed related-party transaction with {{related_party_name}} ({{relationship_nature}}) for {{transaction_nature}} valued at Rs. {{transaction_value}}, and approved the resolution above.{{#if interested_director_name}} {{interested_director_name}}, an interested director,{{#if interest_disclosed}} disclosed their interest under Section 184 and{{/if}} did not participate in the discussion or vote on this item.{{/if}}"
+  },
+  "helpContent": {
+    "interest_disclosed": {
+      "meaning": "Confirms the interested director declared their interest under Section 184 before this item was discussed.",
+      "applicableSection": "Section 184, Section 188",
+      "tip": "An interested director must not vote on the resolution and, other than for certain exempt companies, is excluded from quorum for this item."
+    }
+  }
+}

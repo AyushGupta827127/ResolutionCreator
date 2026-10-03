@@ -1,0 +1,14 @@
+{
+  "id": "ctc-standard",
+  "title": "Certified True Copy",
+  "note": "Standard Indian company-secretarial practice convention (not a verbatim source extract) — confirm against current ICSI/CS guidance and house style before relying on it as final.",
+  "questions": [
+    { "id": "q-ctc-signatory-name", "field": "ctc_signatory_name", "label": "Certifying signatory's name", "type": "text", "required": true, "sequence": 1, "smartDefault": true },
+    { "id": "q-ctc-signatory-designation", "field": "ctc_signatory_designation", "label": "Designation", "type": "text", "required": true, "sequence": 2, "placeholder": "e.g. Director, Company Secretary" },
+    { "id": "q-ctc-signatory-id", "field": "ctc_signatory_id", "label": "DIN or ICSI Membership No.", "type": "text", "required": true, "sequence": 3 },
+    { "id": "q-ctc-place", "field": "ctc_place", "label": "Place of certification", "type": "text", "required": true, "sequence": 4, "smartDefault": true },
+    { "id": "q-ctc-date", "field": "ctc_date", "label": "Date of certification", "type": "date", "required": true, "sequence": 5 }
+  ],
+  "body": "CERTIFIED TRUE COPY\n\nCertified to be a true copy of the Resolution passed by the {{meeting_body}} of {{company_name}} (\"the Company\") at its meeting held on {{meeting_date}} at {{meeting_place}}, and entered in the Minutes Book of the Company maintained under Section 118 of the Companies Act, 2013.\n\nFor {{company_name}}\n\n_______________________\n{{ctc_signatory_name}}\n{{ctc_signatory_designation}} ({{ctc_signatory_id}})\nPlace: {{ctc_place}}\nDate: {{ctc_date}}",
+  "validationNote": "A CTC is only meaningful once the underlying resolution has actually been entered into the Minutes Book — if generated in the same session as the resolution itself, treat that entry as a forward-looking statement, not a completed fact."
+}

@@ -1,0 +1,146 @@
+{
+  "slug": "appoint-statutory-auditor",
+  "title": "Appoint a Statutory Auditor (AGM)",
+  "category": "Shareholder Meeting → Mandatory AGM Items",
+  "keywords": [
+    "auditor",
+    "statutory auditor",
+    "section 139",
+    "appointment of auditor",
+    "AGM",
+    "ordinary resolution"
+  ],
+  "meetingType": "general",
+  "resolutionKind": "ordinary",
+  "description": "Ordinary resolution appointing a statutory auditor at the AGM for a term of years, with remuneration.",
+  "complianceRuleIds": [],
+  "mcaForms": [
+    "ADT-1 (within 15 days of the appointment meeting)"
+  ],
+  "records": [
+    "AGM minutes",
+    "Auditor's written consent and eligibility certificate (Section 139(1))",
+    "Notice of AGM"
+  ],
+  "questions": [
+    {
+      "id": "q-company-name",
+      "field": "company_name",
+      "label": "Company name",
+      "type": "text",
+      "required": true,
+      "sequence": 1,
+      "section": "Company details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-cin",
+      "field": "cin",
+      "label": "Corporate Identification Number (CIN)",
+      "type": "text",
+      "required": true,
+      "sequence": 2,
+      "section": "Company details",
+      "smartDefault": true,
+      "validation": [
+        {
+          "type": "format",
+          "rule": "cin",
+          "severity": "warning",
+          "message": "CIN should be 21 characters (e.g. U12345MH2020PTC123456)."
+        }
+      ]
+    },
+    {
+      "id": "q-meeting-date",
+      "field": "meeting_date",
+      "label": "General meeting date",
+      "type": "date",
+      "required": true,
+      "sequence": 3,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-meeting-place",
+      "field": "meeting_place",
+      "label": "Meeting place",
+      "type": "text",
+      "required": true,
+      "sequence": 4,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-agm-ordinal",
+      "field": "agm_ordinal",
+      "label": "Which AGM is this? (e.g. 12th)",
+      "type": "text",
+      "required": true,
+      "sequence": 5,
+      "section": "Meeting details"
+    },
+    {
+      "id": "q-auditor-firm-name",
+      "field": "auditor_firm_name",
+      "label": "Auditor firm's name",
+      "type": "text",
+      "required": true,
+      "sequence": 6,
+      "section": "Auditor details"
+    },
+    {
+      "id": "q-auditor-frn",
+      "field": "auditor_frn",
+      "label": "ICAI Firm Registration Number",
+      "type": "text",
+      "required": true,
+      "sequence": 7,
+      "section": "Auditor details"
+    },
+    {
+      "id": "q-term-years",
+      "field": "term_years",
+      "label": "Term of appointment (years)",
+      "type": "number",
+      "required": true,
+      "sequence": 8,
+      "section": "Auditor details",
+      "tooltip": "A firm may be appointed for up to 5 consecutive years (Section 139(2) applies the rotation limits to listed and specified companies)."
+    },
+    {
+      "id": "q-until-agm-ordinal",
+      "field": "until_agm_ordinal",
+      "label": "Appointed until the conclusion of which AGM? (e.g. 17th)",
+      "type": "text",
+      "required": true,
+      "sequence": 9,
+      "section": "Auditor details"
+    },
+    {
+      "id": "q-auditor-remuneration",
+      "field": "auditor_remuneration",
+      "label": "Remuneration",
+      "type": "text",
+      "required": true,
+      "sequence": 10,
+      "section": "Auditor details",
+      "placeholder": "e.g. Rs. 2,50,000 plus applicable taxes and out-of-pocket expenses",
+      "tooltip": "The remuneration may be fixed by the members or delegated to the Board."
+    }
+  ],
+  "template": {
+    "agendaTitle": "To appoint {{auditor_firm_name}} as Statutory Auditors of the Company",
+    "proposal": "The Company proposes to appoint {{auditor_firm_name}}, Chartered Accountants (Firm Registration No. {{auditor_frn}}), as Statutory Auditors. The members considered and, if thought fit, approved the following ordinary resolution.",
+    "body": "\"RESOLVED THAT pursuant to Sections 139, 141 and other applicable provisions of the Companies Act, 2013 and the Companies (Audit and Auditors) Rules, 2014, {{auditor_firm_name}}, Chartered Accountants (Firm Registration No. {{auditor_frn}}), be and are hereby appointed as Statutory Auditors of the Company for a term of {{term_years}} years, to hold office from the conclusion of this {{agm_ordinal}} Annual General Meeting until the conclusion of the {{until_agm_ordinal}} Annual General Meeting, at a remuneration of {{auditor_remuneration}}.\n\nRESOLVED FURTHER THAT the Board of Directors be and is hereby authorised to do all acts, deeds and things, including filing Form ADT-1 with the Registrar of Companies within the prescribed time, to give effect to this resolution.\"",
+    "explanatoryStatement": "{{auditor_firm_name}} has furnished its written consent and a certificate that it satisfies the eligibility criteria under Section 141 of the Companies Act, 2013, and that its appointment, if made, will be in accordance with the prescribed conditions. The Board recommends the resolution for approval of the members.",
+    "minutesGist": "Meeting held on {{meeting_date}} at {{meeting_place}}. The members considered the appointment of {{auditor_firm_name}} (FRN {{auditor_frn}}) as Statutory Auditors for {{term_years}} years until the conclusion of the {{until_agm_ordinal}} AGM at a remuneration of {{auditor_remuneration}}, and approved the ordinary resolution above."
+  },
+  "helpContent": {
+    "term_years": {
+      "meaning": "How many consecutive years the firm is appointed for.",
+      "applicableSection": "Section 139(1), 139(2)",
+      "tip": "The appointment runs until the conclusion of the AGM in the final year of the term."
+    }
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "slug": "appoint-director-retiring-by-rotation",
+  "title": "Appoint a Director Retiring by Rotation (AGM)",
+  "category": "Shareholder Meeting → Mandatory AGM Items",
+  "keywords": [
+    "AGM",
+    "retire by rotation",
+    "reappoint director",
+    "ordinary resolution",
+    "shareholders"
+  ],
+  "meetingType": "general",
+  "resolutionKind": "ordinary",
+  "description": "The standard AGM ordinary resolution reappointing (or appointing a replacement for) a director who retires by rotation.",
+  "complianceRuleIds": [],
+  "mcaForms": [
+    "DIR-12 (only if a new person is appointed)"
+  ],
+  "records": [
+    "AGM minutes",
+    "Notice of AGM with Explanatory Statement (if applicable)",
+    "Register of Directors and KMP"
+  ],
+  "questions": [
+    {
+      "id": "q-company-name",
+      "field": "company_name",
+      "label": "Company name",
+      "type": "text",
+      "required": true,
+      "sequence": 1,
+      "section": "Company details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-cin",
+      "field": "cin",
+      "label": "Corporate Identification Number (CIN)",
+      "type": "text",
+      "required": true,
+      "sequence": 2,
+      "section": "Company details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-meeting-date",
+      "field": "meeting_date",
+      "label": "AGM date",
+      "type": "date",
+      "required": true,
+      "sequence": 3,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-meeting-place",
+      "field": "meeting_place",
+      "label": "AGM place",
+      "type": "text",
+      "required": true,
+      "sequence": 4,
+      "section": "Meeting details",
+      "smartDefault": true
+    },
+    {
+      "id": "q-agm-ordinal",
+      "field": "agm_ordinal",
+      "label": "Which AGM is this? (e.g. 12th)",
+      "type": "text",
+      "required": true,
+      "sequence": 5,
+      "section": "Meeting details"
+    },
+    {
+      "id": "q-director-name",
+      "field": "director_name",
+      "label": "Retiring director's full name",
+      "type": "text",
+      "required": true,
+      "sequence": 6,
+      "section": "Director details"
+    },
+    {
+      "id": "q-din",
+      "field": "din",
+      "label": "Director Identification Number (DIN)",
+      "type": "text",
+      "required": true,
+      "sequence": 7,
+      "section": "Director details",
+      "validation": [
+        {
+          "type": "format",
+          "rule": "din",
+          "severity": "critical",
+          "message": "DIN must be exactly 8 digits."
+        }
+      ]
+    },
+    {
+      "id": "q-seeks-reappointment",
+      "field": "seeks_reappointment",
+      "label": "Has the retiring director offered themselves for reappointment?",
+      "type": "radio",
+      "required": true,
+      "sequence": 8,
+      "section": "Director details",
+      "options": [
+        {
+          "label": "Yes",
+          "value": true
+        },
+        {
+          "label": "No",
+          "value": false
+        }
+      ]
+    },
+    {
+      "id": "q-explanatory-statement",
+      "field": "include_explanatory_statement",
+      "label": "Include a Section 102 Explanatory Statement with this resolution?",
+      "type": "radio",
+      "required": true,
+      "sequence": 9,
+      "section": "Notice pairing",
+      "options": [
+        {
+          "label": "Yes",
+          "value": true
+        },
+        {
+          "label": "No, resolution text only",
+          "value": false
+        }
+      ],
+      "tooltip": "The bare resolution text is what gets voted on; the Explanatory Statement is the business rationale attached to the AGM notice."
+    },
+    {
+      "id": "q-rationale",
+      "field": "rationale",
+      "label": "Business rationale for reappointment (for the Explanatory Statement)",
+      "type": "textarea",
+      "required": false,
+      "sequence": 10,
+      "section": "Notice pairing",
+      "conditions": [
+        {
+          "field": "include_explanatory_statement",
+          "operator": "eq",
+          "value": true
+        }
+      ]
+    }
+  ],
+  "template": {
+    "agendaTitle": "To appoint a Director in place of {{director_name}}, who retires by rotation",
+    "proposal": "{{director_name}} (DIN {{din}}) retires by rotation at the {{agm_ordinal}} Annual General Meeting and{{#if seeks_reappointment}}, being eligible, offers themselves for reappointment{{else}} does not seek reappointment{{/if}}. Members are requested to consider and, if thought fit, pass the following resolution as an Ordinary Resolution.",
+    "body": "\"RESOLVED THAT {{director_name}} (DIN {{din}}), who retires by rotation at this {{agm_ordinal}} Annual General Meeting of the Company{{#if seeks_reappointment}} and, being eligible, has offered themselves for reappointment,{{/if}} be and is hereby appointed as a Director of the Company, liable to retire by rotation.\"",
+    "explanatoryStatement": "Pursuant to Section 152 of the Companies Act, 2013, {{director_name}} retires by rotation at this {{agm_ordinal}} Annual General Meeting. {{rationale}} The Board recommends the Ordinary Resolution for approval by the members. None of the Directors or Key Managerial Personnel of the Company, other than {{director_name}}, is concerned or interested, financially or otherwise, in this resolution.",
+    "minutesGist": "Meeting held on {{meeting_date}} at {{meeting_place}}. Members considered the reappointment of {{director_name}} (DIN {{din}}), who retired by rotation at the {{agm_ordinal}} AGM, and passed the Ordinary Resolution set out above."
+  },
+  "helpContent": {
+    "include_explanatory_statement": {
+      "meaning": "Section 102 requires an Explanatory Statement for special business; routine retirement-by-rotation reappointments are usually ordinary business, but many companies attach a short statement anyway for clarity.",
+      "applicableSection": "Section 102"
+    }
+  }
+}
