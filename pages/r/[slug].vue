@@ -512,6 +512,20 @@
               </div>
 
               <Transition name="fade">
+                <div v-if="generateError" id="generate-error" class="rounded-2xl border border-red-200 bg-red-50/60 p-4 text-sm text-red-700" role="alert">
+                  <p class="flex items-center gap-1.5 font-medium">
+                    <Icon name="ph:warning-circle-bold" class="h-4 w-4 shrink-0" /> {{ generateError.message }}
+                  </p>
+                  <ul v-if="generateError.issues.length" class="mt-2 space-y-1">
+                    <li v-for="(issue, i) in generateError.issues" :key="i" class="flex items-start justify-between gap-2">
+                      <span>{{ issue.message }}</span>
+                      <button v-if="issue.field" class="btn-ghost shrink-0 !px-2 !py-1 text-xs text-red-700 hover:bg-red-100" @click="fixField(issue.field)">Fix</button>
+                    </li>
+                  </ul>
+                </div>
+              </Transition>
+
+              <Transition name="fade">
                 <div v-if="finishingIssues.length" class="rounded-2xl border border-red-200 bg-red-50/60 p-4 text-sm text-red-700">
                   <p v-for="(msg, i) in finishingIssues" :key="i" class="flex items-start gap-1.5">
                     <Icon name="ph:warning-circle-bold" class="mt-0.5 h-4 w-4 shrink-0" /> {{ msg }}
@@ -550,19 +564,6 @@
                 </Transition>
               </div>
 
-              <Transition name="fade">
-                <div v-if="generateError" class="rounded-2xl border border-red-200 bg-red-50/60 p-4 text-sm text-red-700">
-                  <p class="flex items-center gap-1.5 font-medium">
-                    <Icon name="ph:warning-circle-bold" class="h-4 w-4 shrink-0" /> {{ generateError.message }}
-                  </p>
-                  <ul v-if="generateError.issues.length" class="mt-2 space-y-1">
-                    <li v-for="issue in generateError.issues" :key="issue.field" class="flex items-center justify-between gap-2">
-                      <span>{{ issue.message }}</span>
-                      <button class="btn-ghost !px-2 !py-1 text-xs text-red-700 hover:bg-red-100" @click="fixFromCompliance([issue.field])">Fix</button>
-                    </li>
-                  </ul>
-                </div>
-              </Transition>
             </aside>
           </div>
 
@@ -1077,6 +1078,16 @@ function saveAndExit() {
   navigateTo("/library");
 }
 
+// "Fix" for a field the server rejected: an Additional-documents field is on this screen; anything else is in the questionnaire.
+function fixField(field) {
+  const el = document.getElementById(`opt-${field}`);
+  if (el) {
+    showExtraErrors.value = true;
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    el.focus({ preventScroll: true });
+  } else fixFromCompliance([field]);
+}
+
 // "Fix this" on a compliance finding: open the section holding the first of its fields.
 function fixFromCompliance(fields = []) {
   const field = fields.find((f) => resolution.value?.questions.some((q) => q.field === f));
@@ -1369,11 +1380,21 @@ async function generate() {
     savedRefinedSnapshot.value = "";
     return true;
   } catch (error) {
-    const issues = error?.data?.data?.inputIssues || [];
+    const data = error?.data?.data || {};
+    // everything the server objected to: invalid/missing answers, and blocking compliance findings (with their own fix fields)
+    const issues = [
+      ...(data.inputIssues || []).filter((i) => i.severity === "critical").map((i) => ({ field: i.field, message: i.message })),
+      ...(data.compliance || []).filter((c) => c.severity === "critical").map((c) => ({ field: c.fields?.[0], message: `${c.title}: ${c.detail || c.message}` })),
+    ];
     generateError.value = {
-      message: error?.data?.statusMessage || "Could not generate the resolution.",
+      message: issues.length ? "We couldn't generate the resolution yet:" : error?.data?.statusMessage || "Could not generate the resolution.",
       issues,
     };
+    // keep the screen honest: if the server found blocking findings, show them as the compliance result
+    if (Array.isArray(data.compliance)) {
+      compliance.value = data.compliance;
+      complianceChecked.value = true;
+    }
     return false;
   } finally {
     generating.value = false;
@@ -1397,6 +1418,13 @@ async function startGenerate() {
     phase.value = "generated";
   } else {
     phase.value = "review";
+    // the review screen is mounted again only now, so this is when the error panel can be scrolled to
+    await nextTick();
+    setTimeout(() => {
+      const panel = document.getElementById("generate-error");
+      panel?.scrollIntoView({ behavior: "smooth", block: "center" });
+      document.getElementById("compliance-panel")?.scrollTo?.({ top: 0 });
+    }, 350);
   }
 }
 

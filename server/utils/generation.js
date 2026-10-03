@@ -34,14 +34,19 @@ export function prepareGeneration(body = {}) {
   const compliance = runComplianceCheck(resolution, answers);
   const data = { inputIssues, compliance: compliance.results };
 
-  if (inputIssues.some((i) => i.severity === "critical")) {
-    throw createError({ statusCode: 422, statusMessage: "Required fields are missing or invalid.", data });
-  }
-  if (compliance.hasCritical) {
-    throw createError({ statusCode: 422, statusMessage: "A critical compliance issue must be resolved before generating.", data });
-  }
+  // The message names what is wrong (first few items) and is logged, so a 422 is never a mystery in the browser or the server logs.
+  const summarize = (items, n = 3) => items.slice(0, n).join(" ") + (items.length > n ? ` (+${items.length - n} more)` : "");
+  const refuse = (statusCode, headline, items) => {
+    console.warn(`[generate] ${statusCode} ${slug}: ${headline} ${summarize(items, 6)}`);
+    throw createError({ statusCode, statusMessage: items.length ? `${headline} ${summarize(items)}` : headline, data });
+  };
+
+  const badInputs = inputIssues.filter((i) => i.severity === "critical");
+  if (badInputs.length) refuse(422, "Some details are missing or invalid:", badInputs.map((i) => i.message));
+  const blocking = compliance.results.filter((r) => r.severity === "critical");
+  if (blocking.length) refuse(422, "A compliance issue must be fixed before generating:", blocking.map((r) => `${r.title} — ${r.detail || r.message}`));
   if (compliance.results.some((r) => r.severity === "warning") && !acknowledgeWarnings) {
-    throw createError({ statusCode: 409, statusMessage: "Compliance warnings need acknowledgement before generating.", data });
+    refuse(409, "Compliance warnings need your confirmation before generating.", compliance.results.filter((r) => r.severity === "warning").map((r) => r.title + "."));
   }
 
   return {
